@@ -13,13 +13,14 @@ type Plugins struct {
 
 //Plugin represents an active fluentd plugin
 type Plugin struct {
-	PluginId              string `json:"plugin_id"`
-	PluginCategory        string `json:"plugin_category"`
-	Type                  string `json:"type"`
-	OutputPlugin          bool   `json:"output_plugin"`
-	BufferQueueLength     int    `json:"buffer_queue_length"`
-	BufferTotalQueuedSize int    `json:"buffer_total_queued_size"`
-	RetryCount            int    `json:"retry_count"`
+	PluginId              string                 `json:"plugin_id"`
+	PluginCategory        string                 `json:"plugin_category"`
+	Type                  string                 `json:"type"`
+	Config                map[string]interface{} `json:"config"`
+	OutputPlugin          bool                   `json:"output_plugin"`
+	BufferQueueLength     int                    `json:"buffer_queue_length"`
+	BufferTotalQueuedSize int                    `json:"buffer_total_queued_size"`
+	RetryCount            int                    `json:"retry_count"`
 }
 
 //Host represents a td-agent host (address/port)
@@ -66,4 +67,3 @@ func (h *Host) clearUpdateError() {
 func NewHost(Address string) *Host {
 	return &Host{Address: Address, Online: false, Plugins: Plugins{Plugins: make([]Plugin, 0)}}
 }
-
